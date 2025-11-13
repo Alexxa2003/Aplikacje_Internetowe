@@ -1,9 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    //mapa
-    const map = L.map(document.querySelector('.geo')).setView([52.2297, 21.0122], 17);
+    const map = L.map(document.querySelector('.geo'));
+    map.setView([0, 0], 2); 
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        map.setView([latitude, longitude], 17);
+        L.marker([latitude, longitude]).addTo(map)
+            .bindPopup(`Twoja lokalizacja:<br>${latitude.toFixed(5)}, ${longitude.toFixed(5)}`)
+            .openPopup();
+    }, () => {
+        console.warn("Nie udało się pobrać lokalizacji — zostaje widok globalny.");
+    });
+}
+
+
+    //warstwa satelitarna ESRI
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://www.esri.com/">Esri</a>'
+        attribution: '&copy; <a href="https://www.esri.com/">Esri</a>, Earthstar Geographics'
     }).addTo(map);
 
     //przycisk lokalizacji
@@ -22,20 +37,73 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    //przycisk pobierz mape
     document.querySelector('.btn.liquidR').addEventListener('click', async () => {
+        console.log("Tworzenie pliku PNG z mapy ESRI...");
+
         const mapContainer = document.querySelector('.geo');
-        await new Promise(r => setTimeout(r, 200));
+        const { width, height } = mapContainer.getBoundingClientRect();
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = width;
+        canvas.height = height;
 
-        html2canvas(mapContainer, { useCORS: true, backgroundColor: "#fff" })
-            .then(canvas => generatePuzzleFromCanvas(canvas))
-            .catch(err => alert("Nie udało się pobrać mapy: " + err.message));
-    });
+        //pobieramy kafelki z Leafleta
+        const tiles = mapContainer.querySelectorAll('.leaflet-tile');
+        if (tiles.length === 0) {
+            console.warn("Brak kafelków. Mapa się jeszcze nie załadowała.");
+            return;
+        }
 
-    //generowanie puzzli z obrazu
+        let loaded = 0;
+
+        for (const tile of tiles) {
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.src = tile.src;
+
+            const transform = tile.style.transform.match(/translate3d\(([-0-9.]+)px,\s*([-0-9.]+)px/);
+            if (!transform) continue;
+
+            const x = parseFloat(transform[1]);
+            const y = parseFloat(transform[2]);
+
+            img.onload = () => {
+                try {
+                    ctx.drawImage(img, x, y);
+                } catch (err) {
+                    console.warn("Nie udało się narysować kafelka:", err);
+                }
+                loaded++;
+                if (loaded === tiles.length) {
+                    downloadCanvasAsImage(canvas, 'mapa.png');
+                    generatePuzzleFromCanvas(canvas);
+                }
+            };
+
+            img.onerror = () => {
+                loaded++;
+                console.warn("Nie udało się załadować kafelka:", tile.src);
+                if (loaded === tiles.length) {
+                    downloadCanvasAsImage(canvas, 'mapa.png');
+                    generatePuzzleFromCanvas(canvas);
+                }
+            };
+        }
+    }); 
+
+    //funkcja zapisująca obraz z canvas jako PNG
+    function downloadCanvasAsImage(canvas, filename) {
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    //generowanie puzzli
     function generatePuzzleFromCanvas(canvas) {
         const puzzleContainer = document.getElementById('puzzleContainer');
         const boardContainer = document.getElementById('boardContainer');
-
         puzzleContainer.innerHTML = '';
         boardContainer.innerHTML = '';
 
@@ -43,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const total = 16;
         const indices = [...Array(total).keys()].sort(() => Math.random() - 0.5);
 
-        //pomieszane puzzle
         indices.forEach(i => {
             const r = Math.floor(i / 4);
             const c = i % 4;
@@ -57,7 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
             puzzleContainer.appendChild(piece);
         });
 
-        //pusta plansza 
         for (let i = 0; i < total; i++) {
             const cell = document.createElement('div');
             cell.className = 'cell';
@@ -70,9 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Puzzle wygenerowane – przeciągnij je na planszę.");
     }
 
-    //obsługa przeciągania
     let dragged = null;
-
     function dragStart(e) {
         dragged = e.target;
     }
@@ -90,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    //sprawdzanie poprawności ułożenia puzzli
     function checkIfSolved() {
         const cells = document.querySelectorAll('.cell');
         const allPlaced = [...cells].every(c => c.children.length === 1);
@@ -105,27 +168,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (solved) {
-            console.log("Wszystkie puzzle ułożone poprawnie!");
+            console.log("Puzzle ułożone poprawnie!");
             showSystemNotification("Puzzle ułożone!");
         } else {
-            console.log("Puzzle nie są jeszcze dobrze ułożone.");
+            console.log("Puzzle nie są poprawnie ułożone.");
         }
     }
 
-    //funkcja wyświetlająca powiadomienie systemowe
+    //powiadomienia systemowe
     function showSystemNotification(message) {
         if (Notification.permission === "granted") {
             new Notification(message);
         } else if (Notification.permission !== "denied") {
             Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    new Notification(message);
-                } else {
-                    console.log("Użytkownik nie zezwolił na powiadomienia systemowe.");
-                }
+                if (permission === "granted") new Notification(message);
             });
-        } else {
-            console.log("Powiadomienia systemowe są zablokowane przez użytkownika.");
         }
     }
 });
