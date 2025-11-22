@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Prognoza pogody</title>
+</head>
+<body>
+    <div class="Card">
+  <div class="CardInner">
+  <label>Witaj w aplikacji pogodynka</label>
+  <div class="container">
+    <button id="search-btn" class="Icon">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+       viewBox="0 0 24 24" fill="none" stroke="#657789" stroke-width="3"
+       stroke-linecap="round" stroke-linejoin="round"
+       class="feather feather-search">
+       <circle cx="11" cy="11" r="8"/>
+       <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+</button>
+
+    <div class="InputContainer">
+      <input id="city-input" placeholder="Wyszukaj miasto..."/>
+    </div>
+  </div>
+ </div>
+</div>    
+
+<div class="Card WeatherNow">
+    <div class="CardInner">
+        <h3 class="section-title">Aktualna pogoda</h3>
+        <div id="weather-now"></div>
+    </div>
+</div>
+
+<div class="Card WeatherForecast">
+    <div class="CardInner">
+        <h3 class="section-title">Prognoza 5-dniowa</h3>
+        <div id="weather-forecast" class="ForecastContainer"></div>
+    </div>
+</div>
+
+<footer class="attribution">
+  <p>Created by Aleksandra Czereszkiewicz</p>
+
+  <a href="https://www.flaticon.com/free-icons/weather" 
+     title="Weather icons created by Freepik - Flaticon"
+     target="_blank" 
+     rel="noopener noreferrer">
+     Weather icons created by Freepik – Flaticon
+  </a>
+</footer>
+</body>
+</html>
