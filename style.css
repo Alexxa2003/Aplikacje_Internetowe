@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Hind:wght@400;600&display=swap');
+
+* {
+  color: #acbdce;
+  box-sizing: border-box;
+}
+
+:root {
+  --radius: 10px;
+  --bg: #e2e9f4;
+  --shadow-light: rgba(255, 255, 255, 0.6);
+  --shadow-dark: #c8d8e7;
+}
+
+html, body {
+  body {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  background: var(--bg);
+  padding-top: 40px;
+  gap: 20px;              
+}
+   
+}
+
+.Card {
+  width: 380px;
+  padding: 1px;
+  border-radius: var(--radius);
+  background: linear-gradient(-67deg, rgba(200,216,231,0.7), rgba(255,255,255,0.8));
+  box-shadow:
+    -2px -2px 6px var(--shadow-light),
+    2px 2px 12px var(--shadow-dark);
+  overflow: hidden;
+}
+
+.CardInner {
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--radius);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.Icon {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 10px;
+}
+
+.Icon:active {
+    box-shadow:
+        inset 2px 2px 6px #c5d4e3,
+        inset -2px -2px 6px rgba(255,255,255,0.7);
+    transform: scale(0.96);
+    transition: 0.05s;
+    border-radius: 8px;
+}
+
+
+.Icon svg {
+  transform: translate(-1px, -1px);
+}
+
+label {
+  color: #3c4b66;
+  margin-bottom: 12px;
+  display: block;
+  font-weight: 600;
+  background: linear-gradient(45deg, #6b7b8f, #3c4b66);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.InputContainer {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.InputContainer::before,
+.InputContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--radius);
+}
+
+.InputContainer::before {
+  box-shadow: inset -2px -2px 4px rgba(255,255,255,0.7);
+}
+
+.InputContainer::after {
+  box-shadow:
+    inset 1px 1px 3px #c5d4e3,
+    inset 2px 2px 6px #c5d4e3;
+}
+
+input {
+  width: 100%;
+  padding: 16px 32px;
+  border: none;
+  background: #e3edf7;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  color: #a9b8c9;
+  transition: 0.25s ease;
+}
+
+input::placeholder {
+  color: #6d7f8f;
+}
+
+input:focus {
+  outline: none;
+  color: #6d7f8f;
+  background: #eef5fd; 
+}
+
+.value {
+    color: #000; 
+    font-weight: 500;
+}
+
+
+.WeatherNow,
+.WeatherForecast {
+  margin-top: 20px;
+}
+
+.section-title {
+  margin: 0 0 12px 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3c4b66;
+}
+
+.ForecastContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.CardForecastItem {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 16px;
+    width: 100%;               
+    box-shadow:
+        -2px -2px 6px rgba(255,255,255,0.6),
+         2px 2px 12px #c8d8e7;
+}
+
+.CardForecastItem p {
+    margin: 4px 0;
+    color: #3c4b66;
+    font-size: 15px;
+}
+
+
+.loader {
+  width: 32px;
+  height: 32px;
+  border: 4px solid rgba(100, 120, 140, 0.3);
+  border-top-color: #657789;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 16px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.weather-icon {
+  margin-right: auto;
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.weather-now-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-details {
+    flex: 1;
+}
+
+.weather-icon-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 50px; 
+}
+
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+}
+
+
+.forecast-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forecast-date {
+    font-weight: 700;
+    color: #3c4b66;
+    font-size: 17px;
+}
+
+
+.forecast-bottom {
+    margin-top: 6px;
+    display: flex;
+    gap: 12px;
+    font-size: 16px;
+    color: #3c4b66;
+}
+
+.forecast-temp {
+    font-weight: 600;
+}
+
+
+.forecast-desc {
+    opacity: 0.8;
+}
+
+
+.weather-icon-forecast {
+    width: 50px;
+    height: 50px;
+    opacity: 0.9;
+    margin-right: 10px;
+}
+
+
+.loading-text {
+  text-align: center;
+  color: #657789;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+
+footer.attribution {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 40px;
+    opacity: 0.6;
+}
+
+footer.attribution a {
+    color: #3c4b66;
+    text-decoration: none;
+}
+
+footer.attribution a:hover {
+    text-decoration: underline;
+}
+
