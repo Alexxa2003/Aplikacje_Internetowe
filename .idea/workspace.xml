@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad0fcc09-ff2d-448e-9348-511632c23a23" name="Changes" comment="" />
+    <list default="true" id="7d90a14d-56f4-4b7c-a421-19d3ae4b8339" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/templates/post/edit.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/edit.html.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/index.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/index.html.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post/show.html.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post/show.html.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
-  <component name="ProjectId" id="33uy4yoznRQ9TYvxnUQBTdo4Q4b" />
+  <component name="PhpDebugGeneral" xdebug_debug_port="55778">
+    <xdebug_debug_ports port="55778" />
+    <xdebug_debug_ports port="9000" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="36FsUL1k35h1E2axXczxhoMqUXU" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -22,26 +36,50 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "PHP Script.index.php.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/olcia/Desktop/STUDIA/SEMESTR 5/Framework/custom-php-framework/config",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.debug",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\olcia\Desktop\STUDIA\SEMESTR 5\Framework\custom-php-framework\config" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.26830.93" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-PS-252.28238.9" />
+        <option value="bundled-php-predefined-a98d8de5180a-58f58c5035b3-com.jetbrains.php.sharedIndexes-PS-252.28238.9" />
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ad0fcc09-ff2d-448e-9348-511632c23a23" name="Changes" comment="" />
-      <created>1760181069173</created>
+      <changelist id="7d90a14d-56f4-4b7c-a421-19d3ae4b8339" name="Changes" comment="" />
+      <created>1764613668888</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1760181069173</updated>
-      <workItem from="1760181069388" duration="17000" />
+      <updated>1764613668888</updated>
+      <workItem from="1764613670224" duration="229000" />
+      <workItem from="1764774340068" duration="1826000" />
+      <workItem from="1765106488483" duration="2935000" />
     </task>
     <servers />
   </component>
